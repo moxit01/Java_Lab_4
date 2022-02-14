@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Lab1</string>
+    <string name="button">Button</string>
+    <string name="button2">Button</string>
+    <string name="india">India</string>
+    <string name="new_zealand">New Zealand</string>
+    <string name="india_score">India_Score</string>
+    <string name="nz_score">NZ_score</string>
+    <string name="india_up"></string>
+    <string name="india_down"></string>
+    <string name="nz_up"></string>
+    <string name="nz_down"></string>
+    <string name="scorecard">Scorecard</string>
+
+    <string-array name="spinner">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="spinner2">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>6</item>
+    </string-array>
+
+
+</resources>
