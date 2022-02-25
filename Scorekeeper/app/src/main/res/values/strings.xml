@@ -12,14 +12,14 @@
     <string name="nz_down"></string>
     <string name="scorecard">Scorecard</string>
 
-    <string-array name="spinner">
+    <string-array name="india_spinner">
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
         <item>6</item>
     </string-array>
-    <string-array name="spinner2">
+    <string-array name="nz_spinner">
         <item>1</item>
         <item>2</item>
         <item>3</item>
