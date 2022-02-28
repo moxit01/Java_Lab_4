@@ -1,7 +1,6 @@
 package com.moxit.Score_keeper;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,16 +10,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.moxit.lab1.R;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
-    TextView textView, I_text, N_text;
-    Spinner spinner,spinner2;
+    TextView I_text, N_text;
+    Spinner india_spinner,nz_spinner;
     Button I_increase,I_decrease,N_increase,N_decrease;
 
-    int I_number = 0;
-    int N_number = 0;
+    int I_score,N_score;
 
 
     @Override
@@ -31,13 +31,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         initLayouts();
         initListeners();
 
+
     }
 
     void initLayouts()
     {
-        //Spinner class for the items
-        spinner = findViewById(R.id.india_spinner);
-        spinner2 = findViewById(R.id.nz_spinner);
+        //LAYOUTS referenced
+        india_spinner = findViewById(R.id.india_spinner);
+        nz_spinner = findViewById(R.id.nz_spinner);
         I_increase = findViewById(R.id.I_Increase);
         I_decrease = findViewById(R.id.I_decrease);
         N_increase = findViewById(R.id.N_Increase);
@@ -54,37 +55,63 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //array Adapter for spinner.
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.india_spinner, android.R.layout.simple_spinner_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-        spinner.getSelectedItemPosition();
+        india_spinner.setAdapter(adapter);
+        india_spinner.getSelectedItemPosition();
+        india_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String text = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
+
+                I_score = Integer.parseInt(String.valueOf(adapterView.getItemAtPosition(i)));
+
+                I_increase.setOnClickListener(view1 -> I_increaseclick());
+
+                I_decrease.setOnClickListener(view12 -> I_decreaseclick());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
                 R.array.nz_spinner, android.R.layout.simple_spinner_item);
-        spinner2.setAdapter(adapter1);
-        spinner2.setOnItemSelectedListener(this);
+        nz_spinner.setAdapter(adapter1);
+        nz_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String text1 = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(adapterView.getContext(), text1, Toast.LENGTH_SHORT).show();
 
+                N_score = Integer.parseInt(String.valueOf(adapterView.getItemAtPosition(i)));
+
+                N_increase.setOnClickListener(view13 -> N_increaseclick());
+
+                N_decrease.setOnClickListener(view14 -> N_decreaseclick());
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
     }
 
-
-    //displays the spinner item selected.
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View textView, int i, long l) {
-        String text = adapterView.getItemAtPosition(i).toString();
-        Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
 
 
 //Increase india score
-    public void I_increase(View view) {
-        if (I_number >= 0) {
-            I_number++;
-            display(I_number);
+    public void I_increaseclick() {
+
+        I_score = Integer.parseInt(String.valueOf(I_score));
+
+        int indiacurrentscore = Integer.parseInt(I_text.getText().toString()) + I_score;
+
+        if (indiacurrentscore >= 0) {
+            I_text.setText(String.valueOf(indiacurrentscore));
         }
         else{
             Toast.makeText(MainActivity.this, "Increase Score", Toast.LENGTH_SHORT).show();
@@ -92,65 +119,50 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    //Decrease India score
-    public void I_decrease(View view) {
-        if (I_number > 0) {
-            I_number--;
-            display(I_number);
+//Decrease India score
+    public void I_decreaseclick() {
+
+
+        I_score = Integer.parseInt(String.valueOf(I_score));
+        int indiacurrentscore = Integer.parseInt(I_text.getText().toString()) - I_score;
+
+        if (indiacurrentscore > 0) {
+            I_text.setText(String.valueOf(indiacurrentscore));
         }
         else{
-            Toast.makeText(MainActivity.this, "Increase Score", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    //Increase Newzealand score
-    public void N_increase(View view) {
-        if (N_number >= 0) {
-            N_number++;
-            displayNZ(N_number);
-        }
-        else{
-            Toast.makeText(MainActivity.this, "Increase Score", Toast.LENGTH_SHORT).show();
-        }
-    }
+//Increase Newzealand score
+    public void N_increaseclick() {
 
+        N_score = Integer.parseInt(String.valueOf(N_score));
+        int NZ_currentscore = Integer.parseInt(N_text.getText().toString()) + N_score;
 
-    // Decrease Newzealand score
-    public void N_decrease(View view) {
-        if (N_number > 0) {
-            N_number--;
-            displayNZ(N_number);
+        if (NZ_currentscore >= 0) {
+            N_text.setText(String.valueOf(NZ_currentscore));
         }
         else{
             Toast.makeText(MainActivity.this, "Increase Score", Toast.LENGTH_SHORT).show();
         }
     }
 
-// Display India score
-    public void display(int number) {
-            TextView display = (TextView) I_text;
-            display.setText("" + number);
+
+//Decrease Newzealand score
+    public void N_decreaseclick() {
+
+        N_score = Integer.parseInt(String.valueOf(N_score));
+        int NZ_currentscore = Integer.parseInt(N_text.getText().toString()) - N_score;
+
+        if (NZ_currentscore > 0) {
+            N_text.setText(String.valueOf(NZ_currentscore));
+        }
+        else{
+            Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+        }
     }
-
-    //Display Nz score
-    public void displayNZ(int number) {
-        TextView displayNZ = (TextView) N_text;
-        displayNZ.setText("" + number);
-
-    }
-
-
 
 }
 
-
-
-
-
-
-//
-//    int f = Integer.parseInt(text);
-//    int t = f + 6;
-//    String s=String.valueOf(t);
-//    String text1 = s;

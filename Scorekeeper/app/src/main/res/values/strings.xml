@@ -4,8 +4,8 @@
     <string name="button2">Button</string>
     <string name="india">India</string>
     <string name="new_zealand">New Zealand</string>
-    <string name="india_score">India_Score</string>
-    <string name="nz_score">NZ_score</string>
+    <string name="india_score">0</string>
+    <string name="nz_score">0</string>
     <string name="india_up"></string>
     <string name="india_down"></string>
     <string name="nz_up"></string>
