@@ -2,6 +2,8 @@ package com.moxit.Score_keeper;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,6 +36,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem menu){
+
+        return true;
+
+    }
+
+
+
     void initLayouts()
     {
         //LAYOUTS referenced
@@ -52,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     void initListeners()
     {
-        //array Adapter for spinner.
+        //array Adapter for spinner which will store the items in the spinner.
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.india_spinner, android.R.layout.simple_spinner_item);
         india_spinner.setAdapter(adapter);
